@@ -1,0 +1,8 @@
+[Unit]
+Description=Node Exporter
+
+[Socket]
+ListenStream={{ http.get('addr') }}:{{ http.get('port') }}
+
+[Install]
+WantedBy=sockets.target

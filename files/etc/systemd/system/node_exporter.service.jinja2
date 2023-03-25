@@ -1,0 +1,13 @@
+[Unit]
+Description=Prometheus Node Exporter
+Documentation=https://github.com/prometheus/node_exporter
+Requires=node_exporter.socket
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+User={{ user }}
+ExecStart={{ dir }}/node_exporter --web.systemd-socket
+
+[Install]
+WantedBy=multi-user.target
