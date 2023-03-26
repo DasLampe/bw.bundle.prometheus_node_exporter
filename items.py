@@ -3,9 +3,10 @@ global node
 version = node.metadata.get('prometheus_node_exporter').get('version')
 checksum = node.metadata.get('prometheus_node_exporter').get('checksum_sha256')
 symlink_dir = node.metadata.get('prometheus_node_exporter').get('directory')
-actual_dir = f'/opt/node_exporter-{version}.linux-amd64'
+arch = node.metadata.get('prometheus_node_exporter').get('arch')
 user = node.metadata.get('prometheus_node_exporter').get('user')
 group = node.metadata.get('prometheus_node_exporter').get('group')
+actual_dir = f'/opt/node_exporter-{version}.linux-{arch}'
 
 groups = {
     group: {}
@@ -24,9 +25,9 @@ users = {
 }
 
 downloads = {
-    f'/tmp/node_exporter-{version}.linux-amd64.tar.gz': {
+    f'/tmp/node_exporter-{version}.linux-{arch}.tar.gz': {
         'url': 'https://github.com/prometheus/node_exporter/releases/download/'
-               f'v{version}/node_exporter-{version}.linux-amd64.tar.gz',
+               f'v{version}/node_exporter-{version}.linux-{arch}.tar.gz',
         'sha256': checksum,
         'unless': f'test -f {actual_dir}/node_exporter',
     },
@@ -34,9 +35,9 @@ downloads = {
 
 actions = {
     'unpack_node_exporter': {
-        'command': f'tar xfvz /tmp/node_exporter-{version}.linux-amd64.tar.gz -C /opt',
+        'command': f'tar xfvz /tmp/node_exporter-{version}.linux-{arch}.tar.gz -C /opt',
         'needs': [
-            f'download:/tmp/node_exporter-{version}.linux-amd64.tar.gz',
+            f'download:/tmp/node_exporter-{version}.linux-{arch}.tar.gz',
         ],
         'unless': f'test -d {actual_dir}',
     },
