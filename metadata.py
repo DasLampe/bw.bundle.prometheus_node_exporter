@@ -1,7 +1,7 @@
 defaults = {
     'prometheus_node_exporter': {
-        'version': '1.5.0',
-        'checksum_sha256': 'af999fd31ab54ed3a34b9f0b10c28e9acee9ef5ac5a5d5edfdde85437db7acbb',
+        'version': '1.6.1',
+        'checksum_sha256': 'ecc41b3b4d53f7b9c16a370419a25a133e48c09dfc49499d63bcc0c5e0cf3d01',
         'arch': 'amd64',
         'directory': '/opt/prometheus_node_exporter',
         'additional_interfaces': [],
